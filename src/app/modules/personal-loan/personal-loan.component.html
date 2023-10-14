@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="simulationStep; else successStep">
     <mat-card-content>
         <h2 class="txt-c"><strong>Simulação de empréstimo pessoal</strong></h2>
 
@@ -21,7 +21,7 @@
 
             <div class="row">
                 <div class="col">
-                    <h3>Arraste para selecionar o valor desejado</h3>
+                    <h3 class="header-small">Arraste para selecionar o valor desejado</h3>
                     <div>
                         <h4>
                             Valor selecionado:
@@ -51,7 +51,7 @@
                 <div class="col txt-c">
                     <button
                         [disabled]="form.invalid"
-                        mat-raised-button
+                        mat-flat-button
                         color="accent"
                         class="simulate-btn"
                         (click)="submitPersonalLoanRequest()"
@@ -93,7 +93,7 @@
                 <div class="col txt-c">
                     <button
                         [disabled]="form.invalid"
-                        mat-raised-button
+                        mat-flat-button
                         color="primary"
                         class="simulate-btn"
                         (click)="confirmPersonalLoanRequest()"
@@ -105,3 +105,45 @@
         </section>
     </mat-card-content>
 </mat-card>
+
+<ng-template #successStep>
+    <mat-card>
+        <mat-card-content>
+            <header class="txt-c">
+                <h2>
+                    <strong>O empréstimo foi realizado com sucesso!</strong>
+                </h2>
+                <h3>Veja abaixo o que você contratou</h3>
+            </header>
+
+            <div class="row loan-simulation-result">
+                <div class="col-12">
+                    <h2>
+                        Esse é o valor que você irá receber:
+                        <strong>{{ finalLoanData.selectedLoanValue | currency: 'BRL' }}</strong>
+                    </h2>
+                </div>
+
+                <div class="col-12">
+                    <p>
+                        Esse é o valor das parcelas:
+                        <strong>{{ finalLoanData.personalLoanData.installmentsValue | currency: 'BRL' }}</strong>
+                    </p>
+                </div>
+
+                <div class="col-12">
+                    <p>
+                        Esse é o número de parcelas: <strong>{{ finalLoanData.personalLoanData.installments }}</strong>
+                    </p>
+                </div>
+
+                <div class="col-12">
+                    <p>
+                        E esse é o total do valor com juros:
+                        <strong>{{ finalLoanData.personalLoanData.finalLoanValue | currency: 'BRL' }}</strong>
+                    </p>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</ng-template>

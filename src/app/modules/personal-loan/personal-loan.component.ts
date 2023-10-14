@@ -2,10 +2,17 @@ import { Component, OnInit } from '@angular/core'
 import { FormControl, UntypedFormGroup, Validators } from '@angular/forms'
 
 import { collapseOnLeaveAnimation, expandOnEnterAnimation } from 'angular-animations'
+import { MatDialog } from '@angular/material/dialog'
 
 import { emailPattern } from '../../shared/validators/patterns'
 import { PersonalLoanService } from './services/personal-loan.service'
 import { PersonalLoanInput, PersonalLoanOutput } from './models/personal-loan.interface'
+import { PersonalLoanConfirmDialogComponent } from './components/personal-loan-confirm-dialog/personal-loan-confirm-dialog.component'
+
+export interface DialogData {
+    personalLoanData: PersonalLoanOutput
+    selectedLoanValue: number
+}
 
 @Component({
     templateUrl: './personal-loan.component.html',
@@ -16,8 +23,13 @@ export class PersonalLoanComponent implements OnInit {
     form!: UntypedFormGroup
     installmentsList: number[] = []
     personalLoanData!: PersonalLoanOutput
+    simulationStep = true
+    finalLoanData!: DialogData
 
-    constructor(private personalLoanService: PersonalLoanService) {}
+    constructor(
+        private personalLoanService: PersonalLoanService,
+        public dialog: MatDialog
+    ) {}
 
     ngOnInit(): void {
         this.createForm()
@@ -41,7 +53,19 @@ export class PersonalLoanComponent implements OnInit {
     }
 
     confirmPersonalLoanRequest() {
-        console.log('abre modal')
+        this.finalLoanData = {
+            personalLoanData: this.personalLoanData,
+            selectedLoanValue: this.form.get('loanValue')?.value,
+        }
+
+        const dialogRef = this.dialog.open(PersonalLoanConfirmDialogComponent, {
+            data: this.finalLoanData,
+            width: '700px',
+        })
+
+        dialogRef.afterClosed().subscribe((value) => {
+            this.simulationStep = value
+        })
     }
 
     private createForm() {

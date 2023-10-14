@@ -14,9 +14,11 @@ import { PersonalLoanComponent } from './personal-loan.component'
 import { PersonalLoanRoutingModule } from './personal-loan-routing.module'
 import { PersonalLoanService } from './services/personal-loan.service'
 import { SharedModule } from 'src/app/shared/shared.module'
+import { MatDialogModule } from '@angular/material/dialog'
+import { PersonalLoanConfirmDialogComponent } from './components/personal-loan-confirm-dialog/personal-loan-confirm-dialog.component'
 
 @NgModule({
-    declarations: [PersonalLoanComponent],
+    declarations: [PersonalLoanComponent, PersonalLoanConfirmDialogComponent],
     imports: [
         CommonModule,
         ReactiveFormsModule,
@@ -27,6 +29,7 @@ import { SharedModule } from 'src/app/shared/shared.module'
         MatCardModule,
         MatSliderModule,
         MatDividerModule,
+        MatDialogModule,
         PersonalLoanRoutingModule,
         SharedModule,
     ],

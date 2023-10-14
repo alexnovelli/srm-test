@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Confirmação dos valores do empréstimo desejado</h1>
+<div mat-dialog-content>
+    <div class="row loan-simulation-result">
+        <div class="col-12">
+            <h2>
+                Esse é o valor que você irá receber:
+                <strong>{{ data.selectedLoanValue | currency: 'BRL' }}</strong>
+            </h2>
+        </div>
+
+        <div class="col-12">
+            <p>
+                Esse é o valor das parcelas:
+                <strong>{{ data.personalLoanData.installmentsValue | currency: 'BRL' }}</strong>
+            </p>
+        </div>
+
+        <div class="col-12">
+            <p>
+                Esse é o número de parcelas: <strong>{{ data.personalLoanData.installments }}</strong>
+            </p>
+        </div>
+
+        <div class="col-12">
+            <p>
+                E esse é o total do valor com juros:
+                <strong>{{ data.personalLoanData.finalLoanValue | currency: 'BRL' }}</strong>
+            </p>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions [align]="'end'">
+    <button mat-stroked-button (click)="closeDialog()">Cancelar</button>
+    <button mat-flat-button color="primary" [mat-dialog-close]="false" cdkFocusInitial>Confirmar</button>
+</div>
