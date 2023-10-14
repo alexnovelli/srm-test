@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core'
 import { FormControl, UntypedFormGroup, Validators } from '@angular/forms'
-import { emailPattern } from 'src/app/shared/validators/patterns'
+
+import { collapseOnLeaveAnimation, expandOnEnterAnimation } from 'angular-animations'
+
+import { emailPattern } from '../../shared/validators/patterns'
 import { PersonalLoanService } from './services/personal-loan.service'
 import { PersonalLoanInput, PersonalLoanOutput } from './models/personal-loan.interface'
-import { collapseOnLeaveAnimation, expandOnEnterAnimation } from 'angular-animations'
 
 @Component({
     templateUrl: './personal-loan.component.html',
