@@ -1,0 +1,26 @@
+main {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    min-height: 100%;
+    background: url('~/src/assets/images/backgrounds/loan-happy.jpg') #febb52 no-repeat top center;
+}
+
+.loader-wrap {
+    background-color: rgba(255, 255, 255, 0.6);
+    position: fixed;
+    overflow: hidden;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+}
+
+.blurry {
+    filter: blur(6px);
+}

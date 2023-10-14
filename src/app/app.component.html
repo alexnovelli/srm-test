@@ -1,1 +1,7 @@
-<router-outlet></router-outlet>
+<main [class.blurry]="showLoader">
+    <router-outlet></router-outlet>
+</main>
+
+<div class="loader-wrap" *ngIf="showLoader">
+    <app-loader></app-loader>
+</div>
